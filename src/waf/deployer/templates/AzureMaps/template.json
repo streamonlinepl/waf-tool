@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "platformName": {
+            "defaultValue": "platformName",
+            "type": "string"
+        },		
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "string"
+        },
+        "mapsSkuName":{
+            "type":"string",
+            "defaultValue": "S0",
+            "allowedValues": ["S0", "S1", "G2"],
+            "metadata": { 
+                "description": "The pricing tier for the account. Use S0 for small-scale development. Use S1 or G2 for large-scale applications." 
+            } 
+        },
+        "mapsSkuTier":{
+            "type":"string",
+            "defaultValue": "Standard",
+            "allowedValues": ["Standard", "Premium"]
+        },
+        "mapsKind":{
+            "type":"string",
+            "defaultValue": "Gen1",
+            "allowedValues": ["Gen1", "Gen2"],
+            "metadata": { 
+                "description": "The pricing tier for the account. Use Gen1 for small-scale development. Use Gen2 for large-scale applications." 
+            } 
+        }
+        
+    },    
+    "variables": {
+        "azureMapsName":"[concat(parameters('platformName'), '-maps')]"
+        
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Maps/accounts",
+            "apiVersion": "2021-12-01-preview",
+            "name": "[variables('azureMapsName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('mapsSkuName')]",
+                "tier": "[parameters('mapsSkuTier')]"
+            },
+            "kind": "[parameters('mapsKind')]",
+            "identity": {
+                "type": "None"
+            },
+            "properties": {
+                "disableLocalAuth": false,
+                "cors": {
+                    "corsRules": [
+                        {
+                            "allowedOrigins": []
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "azureResource":{
+            "type":"string",
+            "value":"AzureMaps"
+        },
+        "mapsName":{
+            "type": "string",
+            "value": "[variables('azureMapsName')]"            
+        },
+        "location":{
+            "type":"string",
+            "value":"[parameters('location')]"
+        },
+        "keys":{
+            "type":"string",
+            "value":"[listKeys(resourceId('Microsoft.Maps/accounts', variables('azureMapsName')), '2021-12-01-preview').primaryKey]"
+        }
+
+
+    }
+}

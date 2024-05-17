@@ -1,0 +1,39 @@
+{
+	"name": "waftool",
+	"version": "1.0.0",
+	"description": "",
+	"main": "start.js",
+	"scripts": {
+		"freshify": "node src/waf/cleanaaa.js",
+		"start-waf": "cls && node start.js clash-tv",
+		"waf-movefederation": "cls && node start.js movefederation-tv",
+		"waf-playlive": "cls && node start.js playlive-net",
+		"waf-famemma": "cls && node start.js famemma-tv",
+		"waf-stonagrod": "cls && node start.js stonagrod-pl",
+		"waf-cloutmma": "cls && node start.js cloutmma-tv",
+		"waf-kswepic": "cls && node start.js kswepic-tv",
+		"waf-stbkswepic": "cls && node start.js stb-kswepic-tv",
+		"waf-bo-kswepic": "cls && node start.js bo-kswepic-tv",
+		"waf-mediaportal": "cls && node start.js mediaportal",
+		"waf-kswepic-surveys": "cls && node start.js kswepic-tv-surveys",
+		"waf-gromda": "cls && node start.js gromda-tv",
+		"waf-primemma": "cls && node start.js primemma-tv",
+		"waf-bo-primemma": "cls && node start.js bo-primemma-tv",
+		"waf-clash": "cls && node start.js clash-tv",
+		"waf-mgpgarage": "cls && node start.js mgpgarage-pl",
+		"start-waf-fresh": "npm run freshify && cls && node start.js clash-tv"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@azure/arm-resources": "^5.2.0",
+		"@azure/identity": "^3.2.2",
+		"@maxmind/geoip2-node": "^3.4.0",
+		"axios": "^0.27.2",
+		"cidr-tools": "4.3.0",
+		"ip-address": "^8.1.0",
+		"ip-cidr": "3.1.0",
+		"line-by-line": "^0.1.6",
+		"net": "^1.0.2"
+	}
+}

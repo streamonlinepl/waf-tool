@@ -1,0 +1,89 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "platformName": {
+            "defaultValue": "redis-unnamed",
+            "type": "String"
+        },
+		
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "String"
+        },
+        "redisVersion":{
+			"type":"string",
+			"allowedValues":[ "4.0", "6.0" ],
+			"defaultValue":"6.0"
+		},
+        "redisSkuName": {
+			"type": "string",
+			"allowedValues": [ "Basic","Standard","Premium" ],
+			"defaultValue": "Standard",
+			"metadata": { "description": "Redis SKU Name" }
+		},
+        "redisSkuFamily": {
+			"type": "string",
+			"allowedValues": [ "C", "P" ],
+			"defaultValue": "C",
+			"metadata": { "description": "Redis SKU family" }
+		},
+		"redisSkuCapacity":{
+			"type":"int",
+			"allowedValues":[ 0, 1, 2, 3, 4, 5, 6 ],
+			"defaultValue":1,
+			"metadata": { "description": "Redis SKU Capacity" }
+		},
+        "redisCluster":{
+            "type":"bool",
+			"defaultValue":false,
+			"metadata": { "description": "Redis cluster?" }
+        },
+        "redisShardCount":{
+            "type":"int",
+			"allowedValues":[ 0, 1, 2, 3, 4, 5, 6 ],
+			"defaultValue":1,
+			"metadata": { "description": "Redis cluster shard count." }
+        }
+    },
+    "variables": {
+
+    },
+    "resources": [
+        {
+            "condition":"[parameters('redisCluster')]",
+            "type": "Microsoft.Cache/Redis",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('platformName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "redisVersion": "6.0",
+                "sku": {
+                    "name": "[parameters('redisSkuName')]",
+                    "family": "[parameters('redisSkuFamily')]",
+                    "capacity": "[parameters('redisSkuCapacity')]"
+                },
+                "enableNonSslPort": true,
+                "publicNetworkAccess": "Enabled",
+                "shardCount":"[parameters('redisShardCount']"
+            }
+        },
+        {
+            "condition":"[not(parameters('redisCluster'))]",
+            "type": "Microsoft.Cache/Redis",
+            "apiVersion": "2022-06-01",
+            "name": "[parameters('platformName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "redisVersion": "6.0",
+                "sku": {
+                    "name": "[parameters('redisSkuName')]",
+                    "family": "[parameters('redisSkuFamily')]",
+                    "capacity": "[parameters('redisSkuCapacity')]"
+                },
+                "enableNonSslPort": true,
+                "publicNetworkAccess": "Enabled"
+            }
+        }
+    ]
+}

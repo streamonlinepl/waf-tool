@@ -1,0 +1,1 @@
+{"created":1686272242810,"lastModified":1686272242810,"lastDeployed":0,"lastDeployment":{"master":{"version":0,"stats":{}},"countries":{"version":0,"stats":{}}},"deployment":{"ruleGroups":["white-rules","country-rules","ddos-rules","directentry-rules","ratelimit-rules"]},"rulesGroups":[],"countries":[]}

@@ -1,0 +1,25 @@
+{
+	"created": 1686189294529,
+	"lastModified": 1686189294529,
+	"lastDeployed": 0,
+	"isp":[],
+	"education": [],
+	"business": [],
+	"hosting": [],
+	"allowed": {
+		"asns": []
+	},
+	"disallowed": {
+		"asns": []
+	},
+	"unblocked": {
+		"asns": []
+	},
+	"blocked": {
+		"asns": [],
+		"nets": [],
+		"nets6": [],
+		"nets_merged": [],
+		"nets6_merged": []
+	}
+}

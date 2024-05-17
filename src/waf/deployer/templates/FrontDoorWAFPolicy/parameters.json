@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "wafName": {
+            "value": "defaultWAFName"
+        },
+		"wafSKU": {
+            "value": "Premium_AzureFrontDoor"
+        },
+        "platformApiHost" : {
+            "value": "api.highlive.tv"
+        }
+    }
+}
